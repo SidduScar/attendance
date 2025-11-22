@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Attendance</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .container {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    form {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    input, select, button {
+      padding: 10px;
+      margin: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background: #4CAF50;
+      color: white;
+      cursor: pointer;
+      border: none;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background: #4CAF50;
+      color: white;
+    }
+    tr:hover {
+      background: #f1f1f1;
+    }
+    .reset-btn {
+      background: #e74c3c;
+    }
+    .reset-btn:hover {
+      background: #c0392b;
+    }
+  </style>
+</head>
+<body>
+  <h1>Student Attendance System</h1>
+  <div class="container">
+    <form id="attendanceForm">
+      <input type="text" id="studentName" placeholder="Enter student name" required>
+      <select id="status">
+        <option value="Present">Present</option>
+        <option value="Absent">Absent</option>
+      </select>
+      <button type="submit">Add</button>
+    </form>
+
+    <table id="attendanceTable">
+      <thead>
+        <tr>
+          <th>Roll No</th>
+          <th>Student Name</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Students will appear here -->
+      </tbody>
+    </table>
+    <br>
+    <button class="reset-btn" onclick="resetAttendance()">Reset Attendance</button>
+  </div>
+
+  <script>
+    let rollNo = 1;
+
+    document.getElementById("attendanceForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      let name = document.getElementById("studentName").value;
+      let status = document.getElementById("status").value;
+
+      let table = document.getElementById("attendanceTable").getElementsByTagName("tbody")[0];
+      let newRow = table.insertRow();
+
+      let cell1 = newRow.insertCell(0);
+      let cell2 = newRow.insertCell(1);
+      let cell3 = newRow.insertCell(2);
+
+      cell1.innerHTML = rollNo++;
+      cell2.innerHTML = name;
+      cell3.innerHTML = status;
+
+      document.getElementById("attendanceForm").reset();
+    });
+
+    function resetAttendance() {
+      document.getElementById("attendanceTable").getElementsByTagName("tbody")[0].innerHTML = "";
+      rollNo = 1;
+    }
+  </script>
+</body>
+</html>
